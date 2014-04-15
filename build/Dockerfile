@@ -12,8 +12,6 @@ RUN apt-get install -y --no-install-recommends irssi tmux
 # Clean-up apt
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*.5
 
-RUN echo "Cache: 4"
-
 # Add our services
 ADD service /etc/service
 RUN chmod a+x /etc/service/*/run
@@ -27,6 +25,3 @@ RUN /sbin/prepare_user.sh
 
 # The init script
 CMD ["/sbin/my_init"]
-
-# For debugging purposes, will be removed in later versions
-RUN /usr/sbin/enable_insecure_key
