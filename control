@@ -1,0 +1,50 @@
+#!/bin/bash
+
+build() {
+	docker build -t=twistlock/irssi container
+}
+
+run() {
+	docker run -d twistlock/irssi
+}
+
+link() {
+	echo "link"
+}
+
+stop() {
+	echo "Stopping"
+	docker stop $1
+	echo "Removing"
+	docker rm $1
+}
+
+usage() {
+    echo "This script controls the container in this directory. It can be run with any of the following commands."
+    echo ""
+    echo "Usage:"
+    echo "    control build                       # Prepare the container"
+    echo "    control run                         # Run a container, prints id to stdout"
+    echo "    control link <id>                   # Link a container, link options are passed in JSON over stdin "
+    echo "    control stop <id>                   # Stop a container"                  
+}
+
+COMMAND=$1
+shift
+case $COMMAND in
+    "build")
+        build $@
+        ;;
+    "run")
+        run $@
+        ;;
+    "link")
+        link $@
+        ;;
+    "stop")
+        stop $@
+        ;;
+    *)
+        usage
+        ;;
+esac
