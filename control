@@ -2,10 +2,12 @@
 
 build() {
 	docker build -t=twistlock/irssi container
+	docker pull tinco/run-command-generator
 }
 
 run() {
-	docker run -d twistlock/irssi
+	command=$(docker run -i -a stdin -a stdout tinco/run-command-generator)
+	eval "$command twistlock/irssi"
 }
 
 link() {

@@ -1,0 +1,5 @@
+{
+	"mounts" : {
+		"/home/irssi" : "/home/phusion/Source/twistlock/irssi/home-example"
+	}
+}
